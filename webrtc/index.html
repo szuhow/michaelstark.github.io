@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+Current ID: <label id="labelId"></label><br>
+<a id="test" href="./test.html?id=">TEST</a><br>
+<a id="video" href="./video.html?id=">VIDEO</a><br>
+</body>
+<script>
+    var id = Math.floor(Math.random() * 100) + 1;
+    document.getElementById("test").href += id;
+    document.getElementById("video").href += id;
+    document.getElementById("labelId").innerText += id;
+</script>
+</html>
