@@ -21,8 +21,16 @@
             width: calc(100% - 20px);
             height: calc(100% - 20px);
         }
+
+        a {
+            display: block;
+            color: #8caacc;
+            margin: 1rem;
+        }
     </style>
     <script src="./js/version.js"></script>
+    <script src="./js/i18n/i18n_en.js"></script>
+    <script src="./js/i18n/i18n_ru.js"></script>
     <script src="./js/i18n/i18n.js"></script>
     <script src="./js/i18n/i18nextBrowserLanguageDetector.min.js"></script>
     <script src="./js/i18n/i18next.js"></script>
@@ -38,8 +46,15 @@
         </form>
     </div>
     <script>
+        function onCopyRCLink() {
+            navigator.clipboard.writeText(window.location.origin + "/calculator/?hostPeerId=" + localStorage.getItem("currentPeerId"));
+            alert("📋👍");
+        };
         i18next.use(i18nextBrowserLanguageDetector).init(i18n).then(_ => {
-            document.body.innerHTML += i18next.t("readme");
+            const params = new Proxy(new URLSearchParams(window.location.search), {
+                get: (searchParams, prop) => searchParams.get(prop),
+            });
+            document.body.innerHTML += i18next.t(!!params.part ? `readme_part_${params.part}` : "readme");
         });
     </script>
 </body>
